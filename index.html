@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational OTP API Demo | Learn How SMS/Call APIs Work</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="warning-banner">
+        ⚠️ EDUCATIONAL PURPOSE ONLY - This is a DEMO that shows API structure without sending real requests
+    </div>
+
+    <div class="container">
+        <h1>📚 Educational OTP/Call API Structure Demo</h1>
+        <p class="subtitle">Learn how SMS and Voice OTP APIs work - For Educational Purposes Only</p>
+
+        <!-- Legal Consent Section -->
+        <div class="consent-card" id="consentCard">
+            <h2>📝 Legal Consent Required</h2>
+            <div class="legal-text">
+                <p>By using this demo, I confirm that:</p>
+                <ul>
+                    <li>✅ I understand this is for <strong>EDUCATIONAL PURPOSES ONLY</strong></li>
+                    <li>✅ I will NOT use this information for any illegal activities</li>
+                    <li>✅ I understand that unauthorized OTP bombing is a <strong>CYBER CRIME</strong> under IT Act 2000</li>
+                    <li>✅ I will only test on my OWN phone numbers with proper API keys</li>
+                    <li>✅ I will use official APIs (Twilio, MSG91, Fast2SMS) for legitimate purposes</li>
+                </ul>
+            </div>
+            <div class="consent-actions">
+                <input type="checkbox" id="consentCheckbox">
+                <label for="consentCheckbox">I have read and agree to the above terms</label>
+                <button id="acceptBtn" disabled>Continue to Demo</button>
+            </div>
+        </div>
+
+        <!-- Main Demo Content (Hidden until consent) -->
+        <div id="demoContent" style="display: none;">
+            <!-- API Info Cards -->
+            <div class="api-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="apiCount">0</div>
+                    <div class="stat-label">API Endpoints (Demo)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="requestCount">0</div>
+                    <div class="stat-label">Demo Requests</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="rateLimit">10</div>
+                    <div class="stat-label">Rate Limit/Day</div>
+                </div>
+            </div>
+
+            <!-- API Explorer -->
+            <div class="explorer-section">
+                <h2>🔍 API Structure Explorer</h2>
+                <p>Select an API to see how real OTP requests are structured:</p>
+                
+                <div class="api-selector">
+                    <select id="apiSelect">
+                        <option value="">-- Select Platform --</option>
+                    </select>
+                    <button id="simulateBtn" class="simulate-btn">▶ Simulate Request (No Real SMS)</button>
+                </div>
+
+                <div class="api-details" id="apiDetails">
+                    <div class="detail-header">📡 API Request Structure</div>
+                    <pre id="requestStructure" class="code-block">Select an API to view structure</pre>
+                    <div class="detail-header">📤 Simulated Response</div>
+                    <pre id="responseStructure" class="code-block">Click "Simulate Request" to see demo response</pre>
+                </div>
+            </div>
+
+            <!-- Legal API Alternatives -->
+            <div class="alternatives-section">
+                <h2>✅ Legal Alternatives for Real SMS/Call</h2>
+                <div class="alternatives-grid">
+                    <div class="alt-card">
+                        <h3>📱 Twilio</h3>
+                        <p>International SMS/Call API</p>
+                        <code>twilio.com/docs/sms</code>
+                        <span class="price">$0.0075/SMS</span>
+                    </div>
+                    <div class="alt-card">
+                        <h3>🇮🇳 MSG91</h3>
+                        <p>Indian SMS Gateway</p>
+                        <code>docs.msg91.com</code>
+                        <span class="price">₹0.09/SMS</span>
+                    </div>
+                    <div class="alt-card">
+                        <h3>⚡ Fast2SMS</h3>
+                        <p>Free Trial Available</p>
+                        <code>fast2sms.com</code>
+                        <span class="price">10 Free SMS/day</span>
+                    </div>
+                    <div class="alt-card">
+                        <h3>📞 TextLocal</h3>
+                        <p>Bulk SMS Service</p>
+                        <code>api.textlocal.in</code>
+                        <span class="price">Pay as you go</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Section -->
+            <div class="warning-section">
+                <h2>⚠️ Legal Warning</h2>
+                <div class="warning-content">
+                    <p><strong>Under Indian IT Act 2000:</strong></p>
+                    <ul>
+                        <li><strong>Section 66D:</strong> Punishment for cheating by personation - Up to 3 years imprisonment</li>
+                        <li><strong>Section 72:</strong> Penalty for breach of confidentiality - Up to 2 years imprisonment</li>
+                        <li><strong>Section 43:</strong> Damage to computer system - Compensation up to ₹1 crore</li>
+                    </ul>
+                    <p class="highlight">🚨 Sending unauthorized OTPs/SMS/Calls is a <strong>NON-BAILABLE OFFENSE</strong></p>
+                </div>
+            </div>
+
+            <!-- Test Log -->
+            <div class="log-section">
+                <h2>📋 Demo Activity Log</h2>
+                <div id="activityLog">
+                    <div class="log-entry">Ready to demonstrate API structures...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
