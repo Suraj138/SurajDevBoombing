@@ -3,131 +3,499 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational OTP API Demo | Learn How SMS/Call APIs Work</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SurajDev - Educational API Security Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            line-height: 1.6;
+        }
+
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 0 red, -2px 0 blue; }
+            50% { text-shadow: -2px 0 red, 2px 0 blue; }
+        }
+
+        /* Header */
+        .header {
+            background: #000;
+            border-bottom: 2px solid #00ff41;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,255,65,0.3);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            letter-spacing: 2px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #00ff41;
+            color: #000;
+            padding: 5px 10px;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        /* Warning Banner */
+        .warning-banner {
+            background: #ff0000;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #0a0a0a;
+            border: 1px solid #00ff41;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff41;
+        }
+
+        /* API Categories */
+        .api-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .category-card {
+            background: #0a0a0a;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .category-header {
+            background: #00ff41;
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .api-list {
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .api-item {
+            padding: 8px;
+            margin: 5px 0;
+            border-left: 2px solid #00ff41;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .api-item:hover {
+            background: #00ff4122;
+            transform: translateX(5px);
+        }
+
+        /* API Details */
+        .api-detail {
+            background: #0a0a0a;
+            border: 2px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .detail-header {
+            background: #00ff41;
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background: #000;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 12px;
+            color: #00ff41;
+            border-left: 3px solid #00ff41;
+        }
+
+        /* Terminal */
+        .terminal {
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #00ff41;
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .terminal-content {
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            height: 300px;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+            white-space: pre-wrap;
+        }
+
+        .input-line {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input-line input {
+            flex: 1;
+            background: #000;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 8px;
+            font-family: monospace;
+        }
+
+        .input-line button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Legal Section */
+        .legal-section {
+            background: #0a0a0a;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .legal-section h3 {
+            color: #ff0000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid, .api-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="warning-banner">
-        ⚠️ EDUCATIONAL PURPOSE ONLY - This is a DEMO that shows API structure without sending real requests
+        ⚠️ EDUCATIONAL & RESEARCH PURPOSE ONLY - UNAUTHORIZED USE IS PUNISHABLE UNDER IT ACT 2000 ⚠️
+    </div>
+
+    <div class="header">
+        <h1 class="glitch">💀 SURAJDEV SECURITY RESEARCH 💀</h1>
+        <div class="badge">ETHICAL HACKING LAB</div>
+        <div class="badge">API STRUCTURE ANALYSIS</div>
+        <div class="badge">EDUCATIONAL ONLY</div>
     </div>
 
     <div class="container">
-        <h1>📚 Educational OTP/Call API Structure Demo</h1>
-        <p class="subtitle">Learn how SMS and Voice OTP APIs work - For Educational Purposes Only</p>
-
-        <!-- Legal Consent Section -->
-        <div class="consent-card" id="consentCard">
-            <h2>📝 Legal Consent Required</h2>
-            <div class="legal-text">
-                <p>By using this demo, I confirm that:</p>
-                <ul>
-                    <li>✅ I understand this is for <strong>EDUCATIONAL PURPOSES ONLY</strong></li>
-                    <li>✅ I will NOT use this information for any illegal activities</li>
-                    <li>✅ I understand that unauthorized OTP bombing is a <strong>CYBER CRIME</strong> under IT Act 2000</li>
-                    <li>✅ I will only test on my OWN phone numbers with proper API keys</li>
-                    <li>✅ I will use official APIs (Twilio, MSG91, Fast2SMS) for legitimate purposes</li>
-                </ul>
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="apiCount">0</div>
+                <div>APIs Analyzed</div>
             </div>
-            <div class="consent-actions">
-                <input type="checkbox" id="consentCheckbox">
-                <label for="consentCheckbox">I have read and agree to the above terms</label>
-                <button id="acceptBtn" disabled>Continue to Demo</button>
+            <div class="stat-card">
+                <div class="stat-number" id="smsCount">0</div>
+                <div>SMS APIs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="callCount">0</div>
+                <div>Voice/Call APIs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="demoCount">0</div>
+                <div>Demo Simulations</div>
             </div>
         </div>
 
-        <!-- Main Demo Content (Hidden until consent) -->
-        <div id="demoContent" style="display: none;">
-            <!-- API Info Cards -->
-            <div class="api-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="apiCount">0</div>
-                    <div class="stat-label">API Endpoints (Demo)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="requestCount">0</div>
-                    <div class="stat-label">Demo Requests</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="rateLimit">10</div>
-                    <div class="stat-label">Rate Limit/Day</div>
-                </div>
+        <!-- API Categories -->
+        <div class="api-categories">
+            <div class="category-card">
+                <div class="category-header">📱 E-COMMERCE & RETAIL</div>
+                <div class="api-list" id="ecommerceList"></div>
             </div>
-
-            <!-- API Explorer -->
-            <div class="explorer-section">
-                <h2>🔍 API Structure Explorer</h2>
-                <p>Select an API to see how real OTP requests are structured:</p>
-                
-                <div class="api-selector">
-                    <select id="apiSelect">
-                        <option value="">-- Select Platform --</option>
-                    </select>
-                    <button id="simulateBtn" class="simulate-btn">▶ Simulate Request (No Real SMS)</button>
-                </div>
-
-                <div class="api-details" id="apiDetails">
-                    <div class="detail-header">📡 API Request Structure</div>
-                    <pre id="requestStructure" class="code-block">Select an API to view structure</pre>
-                    <div class="detail-header">📤 Simulated Response</div>
-                    <pre id="responseStructure" class="code-block">Click "Simulate Request" to see demo response</pre>
-                </div>
+            <div class="category-card">
+                <div class="category-header">🏦 BANKING & FINANCE</div>
+                <div class="api-list" id="bankingList"></div>
             </div>
-
-            <!-- Legal API Alternatives -->
-            <div class="alternatives-section">
-                <h2>✅ Legal Alternatives for Real SMS/Call</h2>
-                <div class="alternatives-grid">
-                    <div class="alt-card">
-                        <h3>📱 Twilio</h3>
-                        <p>International SMS/Call API</p>
-                        <code>twilio.com/docs/sms</code>
-                        <span class="price">$0.0075/SMS</span>
-                    </div>
-                    <div class="alt-card">
-                        <h3>🇮🇳 MSG91</h3>
-                        <p>Indian SMS Gateway</p>
-                        <code>docs.msg91.com</code>
-                        <span class="price">₹0.09/SMS</span>
-                    </div>
-                    <div class="alt-card">
-                        <h3>⚡ Fast2SMS</h3>
-                        <p>Free Trial Available</p>
-                        <code>fast2sms.com</code>
-                        <span class="price">10 Free SMS/day</span>
-                    </div>
-                    <div class="alt-card">
-                        <h3>📞 TextLocal</h3>
-                        <p>Bulk SMS Service</p>
-                        <code>api.textlocal.in</code>
-                        <span class="price">Pay as you go</span>
-                    </div>
-                </div>
+            <div class="category-card">
+                <div class="category-header">📺 ENTERTAINMENT & SOCIAL</div>
+                <div class="api-list" id="socialList"></div>
             </div>
+        </div>
 
-            <!-- Warning Section -->
-            <div class="warning-section">
-                <h2>⚠️ Legal Warning</h2>
-                <div class="warning-content">
-                    <p><strong>Under Indian IT Act 2000:</strong></p>
-                    <ul>
-                        <li><strong>Section 66D:</strong> Punishment for cheating by personation - Up to 3 years imprisonment</li>
-                        <li><strong>Section 72:</strong> Penalty for breach of confidentiality - Up to 2 years imprisonment</li>
-                        <li><strong>Section 43:</strong> Damage to computer system - Compensation up to ₹1 crore</li>
-                    </ul>
-                    <p class="highlight">🚨 Sending unauthorized OTPs/SMS/Calls is a <strong>NON-BAILABLE OFFENSE</strong></p>
-                </div>
-            </div>
+        <!-- API Details -->
+        <div class="api-detail" id="apiDetail" style="display: none;">
+            <div class="detail-header">📡 API REQUEST STRUCTURE</div>
+            <pre id="requestStructure">Select an API to view structure</pre>
+            <div class="detail-header" style="margin-top: 15px;">📤 SIMULATED RESPONSE</div>
+            <pre id="responseStructure">No simulation yet</pre>
+        </div>
 
-            <!-- Test Log -->
-            <div class="log-section">
-                <h2>📋 Demo Activity Log</h2>
-                <div id="activityLog">
-                    <div class="log-entry">Ready to demonstrate API structures...</div>
-                </div>
+        <!-- Terminal -->
+        <div class="terminal">
+            <div class="terminal-header">💻 SURAJDEV SECURITY TERMINAL v1.0</div>
+            <div class="terminal-content" id="terminal">
+                <div class="terminal-line">> Security Research Lab Initialized</div>
+                <div class="terminal-line">> Loading API Database...</div>
+                <div class="terminal-line">> 100+ API Structures Loaded</div>
+                <div class="terminal-line">> [WARNING] Educational Mode Only - No Real Requests</div>
+                <div class="terminal-line">> Type 'help' for commands</div>
+                <div class="terminal-line">></div>
             </div>
+            <div class="input-line" style="padding: 15px;">
+                <input type="text" id="terminalInput" placeholder="Enter command (help, list, analyze, clear)" style="flex:1;">
+                <button onclick="executeCommand()">ENTER</button>
+            </div>
+        </div>
+
+        <!-- Legal Notice -->
+        <div class="legal-section">
+            <h3>⚠️ LEGAL NOTICE UNDER INDIAN IT ACT 2000</h3>
+            <br>
+            <p><strong>Section 66D:</strong> Punishment for cheating by personation using computer resource - <span style="color:#ff0000;">Imprisonment up to 3 years + Fine up to ₹5 lakh</span></p>
+            <p><strong>Section 72:</strong> Penalty for breach of confidentiality - <span style="color:#ff0000;">Imprisonment up to 2 years + Fine up to ₹1 lakh</span></p>
+            <p><strong>Section 43:</strong> Damage to computer system - <span style="color:#ff0000;">Compensation up to ₹1 crore</span></p>
+            <br>
+            <p style="color: #00ff41;">✅ This tool is for EDUCATIONAL PURPOSES only. No real requests are sent. All simulations are local.</p>
+            <p style="color: #ffff00;">✅ For legitimate SMS/Call services, use official APIs: Twilio, MSG91, Fast2SMS, TextLocal</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // API Database (Structures Only)
+        const apiDatabase = {
+            ecommerce: [
+                { name: "Amazon India", type: "SMS", endpoint: "https://www.amazon.in/ap/signin", method: "POST", body: 'phone=91XXXXXXXXXX&action=otp' },
+                { name: "Flipkart", type: "VOICE", endpoint: "https://www.flipkart.com/api/6/user/voice-otp/generate", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Myntra", type: "SMS", endpoint: "https://www.myntra.com/gw/mobile-auth/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Swiggy", type: "SMS", endpoint: "https://www.swiggy.com/api/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Zomato", type: "VOICE", endpoint: "https://www.zomato.com/php/o2_api_handler.php", method: "POST", body: 'phone=91XXXXXXXXXX&type=voice' },
+                { name: "Paytm", type: "SMS", endpoint: "https://accounts.paytm.com/signin/otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "PhonePe", type: "SMS", endpoint: "https://www.phonepe.com/api/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Google Pay", type: "VOICE", endpoint: "https://pay.google.com/api/v1/voice-otp", method: "POST", body: '{"phone":"+91XXXXXXXXXX"}' }
+            ],
+            banking: [
+                { name: "SBI YONO", type: "VOICE", endpoint: "https://yonosbi.sbi.co.in/api/v1/voice-otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "HDFC Bank", type: "SMS", endpoint: "https://netbanking.hdfcbank.com/api/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "ICICI iMobile", type: "VOICE", endpoint: "https://www.icicibank.com/api/v1/voice-otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "Axis Bank", type: "SMS", endpoint: "https://www.axisbank.com/api/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Kotak Bank", type: "VOICE", endpoint: "https://www.kotak.com/api/v1/voice-otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "Yes Bank", type: "SMS", endpoint: "https://www.yesbank.in/api/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' }
+            ],
+            social: [
+                { name: "WhatsApp", type: "VOICE", endpoint: "https://www.whatsapp.com/api/v1/voice-otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "Instagram", type: "SMS", endpoint: "https://www.instagram.com/api/v1/otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "Twitter/X", type: "SMS", endpoint: "https://api.twitter.com/v1/otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Telegram", type: "VOICE", endpoint: "https://api.telegram.org/v1/voice-otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' },
+                { name: "Netflix", type: "VOICE", endpoint: "https://www.netflix.com/api/v1/voice-otp", method: "POST", body: '{"mobile":"91XXXXXXXXXX"}' },
+                { name: "Hotstar", type: "SMS", endpoint: "https://www.hotstar.com/api/v1/otp", method: "POST", body: '{"phone":"91XXXXXXXXXX"}' }
+            ]
+        };
+
+        let smsCount = 0;
+        let callCount = 0;
+        let demoCount = 0;
+
+        function loadAPIs() {
+            // Count APIs
+            Object.values(apiDatabase).forEach(category => {
+                category.forEach(api => {
+                    if (api.type === "SMS") smsCount++;
+                    else callCount++;
+                });
+            });
+            
+            document.getElementById('apiCount').textContent = Object.values(apiDatabase).flat().length;
+            document.getElementById('smsCount').textContent = smsCount;
+            document.getElementById('callCount').textContent = callCount;
+            
+            // Populate lists
+            const ecommerceList = document.getElementById('ecommerceList');
+            const bankingList = document.getElementById('bankingList');
+            const socialList = document.getElementById('socialList');
+            
+            apiDatabase.ecommerce.forEach(api => {
+                const div = document.createElement('div');
+                div.className = 'api-item';
+                div.innerHTML = `${api.type === 'SMS' ? '💬' : '📞'} ${api.name}`;
+                div.onclick = () => showAPIStructure(api);
+                ecommerceList.appendChild(div);
+            });
+            
+            apiDatabase.banking.forEach(api => {
+                const div = document.createElement('div');
+                div.className = 'api-item';
+                div.innerHTML = `${api.type === 'SMS' ? '💬' : '📞'} ${api.name}`;
+                div.onclick = () => showAPIStructure(api);
+                bankingList.appendChild(div);
+            });
+            
+            apiDatabase.social.forEach(api => {
+                const div = document.createElement('div');
+                div.className = 'api-item';
+                div.innerHTML = `${api.type === 'SMS' ? '💬' : '📞'} ${api.name}`;
+                div.onclick = () => showAPIStructure(api);
+                socialList.appendChild(div);
+            });
+        }
+
+        function showAPIStructure(api) {
+            const structure = {
+                "API Name": api.name,
+                "Type": api.type,
+                "Method": api.method,
+                "Endpoint": api.endpoint,
+                "Headers": {"Content-Type": "application/json"},
+                "Request Body": api.body,
+                "Note": "⚠️ EDUCATIONAL DEMO - No real request is sent"
+            };
+            
+            document.getElementById('apiDetail').style.display = 'block';
+            document.getElementById('requestStructure').textContent = JSON.stringify(structure, null, 2);
+            
+            // Simulate response
+            const simulated = {
+                "status": "SIMULATED",
+                "message": `[DEMO] ${api.name} ${api.type} request structure analyzed`,
+                "real_request_would_require": "Valid API Key + Target Number + Permission",
+                "legal_status": "Unauthorized use is illegal under IT Act 2000",
+                "timestamp": new Date().toISOString()
+            };
+            
+            document.getElementById('responseStructure').textContent = JSON.stringify(simulated, null, 2);
+            
+            // Update demo counter
+            demoCount++;
+            document.getElementById('demoCount').textContent = demoCount;
+            
+            // Terminal log
+            addTerminalLine(`[ANALYZED] ${api.name} (${api.type}) - Structure extracted`, '#00ff41');
+        }
+
+        function addTerminalLine(text, color = '#00ff41') {
+            const terminal = document.getElementById('terminal');
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.style.color = color;
+            line.innerHTML = `> ${text}`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function executeCommand() {
+            const input = document.getElementById('terminalInput');
+            const cmd = input.value.toLowerCase();
+            addTerminalLine(`$ ${cmd}`, '#ffff00');
+            
+            if (cmd === 'help') {
+                addTerminalLine('Available Commands:');
+                addTerminalLine('  help     - Show this menu');
+                addTerminalLine('  list     - List all API categories');
+                addTerminalLine('  stats    - Show statistics');
+                addTerminalLine('  legal    - Show legal information');
+                addTerminalLine('  clear    - Clear terminal');
+                addTerminalLine('  exit     - Close terminal');
+            } else if (cmd === 'list') {
+                addTerminalLine('API Categories:');
+                addTerminalLine('  📱 E-COMMERCE & RETAIL - 8 APIs');
+                addTerminalLine('  🏦 BANKING & FINANCE - 6 APIs');
+                addTerminalLine('  📺 ENTERTAINMENT & SOCIAL - 6 APIs');
+                addTerminalLine('  Total APIs Analyzed: 20');
+            } else if (cmd === 'stats') {
+                addTerminalLine(`Statistics:`);
+                addTerminalLine(`  Total APIs: ${Object.values(apiDatabase).flat().length}`);
+                addTerminalLine(`  SMS APIs: ${smsCount}`);
+                addTerminalLine(`  Voice/Call APIs: ${callCount}`);
+                addTerminalLine(`  Demo Simulations: ${demoCount}`);
+            } else if (cmd === 'legal') {
+                addTerminalLine('⚠️ LEGAL NOTICE:');
+                addTerminalLine('  This tool is for EDUCATIONAL PURPOSES only');
+                addTerminalLine('  Unauthorized SMS/Call bombing is a CYBER CRIME');
+                addTerminalLine('  Punishable under IT Act 2000 Sections 66D, 72, 43');
+                addTerminalLine('  Use official APIs (Twilio, MSG91) for legitimate needs');
+            } else if (cmd === 'clear') {
+                document.getElementById('terminal').innerHTML = '<div class="terminal-line">> Terminal cleared</div><div class="terminal-line">></div>';
+            } else if (cmd === 'exit') {
+                addTerminalLine('Type /help for available commands');
+            } else if (cmd === '') {
+                // do nothing
+            } else {
+                addTerminalLine(`Command not found: ${cmd}. Type 'help' for available commands.`, '#ff0000');
+            }
+            
+            input.value = '';
+        }
+
+        // Initialize
+        loadAPIs();
+        addTerminalLine('Welcome to SurajDev Security Research Lab', '#00ff41');
+        addTerminalLine('Click on any API to analyze its structure', '#00ff41');
+        addTerminalLine('Type "help" for terminal commands', '#00ff41');
+    </script>
 </body>
 </html>
